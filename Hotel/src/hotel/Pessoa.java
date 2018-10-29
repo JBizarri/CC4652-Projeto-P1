@@ -10,13 +10,15 @@ package hotel;
  * @author unifgnascimento
  */
 public class Pessoa {
-    public Pessoa(String nome, String endereco, String cidade, String contato){
+    public Pessoa(String nome, String endereco, String cidade, String contato, int cpf){
         this.nome = nome;
         this.endereco = endereco;
         this.cidade = cidade;
         this.contato = contato;
+        this.cpf = cpf;
         hospedado = false;
     }
+    
     
       public String getNome() {
         return nome;
@@ -50,6 +52,16 @@ public class Pessoa {
         this.contato = contato;
     }
 
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+    
+    
+
     public boolean isHospedado() {
         return hospedado;
     }
@@ -63,6 +75,7 @@ public class Pessoa {
     protected String endereco;
     protected String cidade;
     protected String contato;
+    protected int cpf;
     protected boolean hospedado;
 
   

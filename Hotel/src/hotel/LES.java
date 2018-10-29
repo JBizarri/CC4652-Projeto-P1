@@ -10,12 +10,12 @@ package hotel;
  * @author unifgnascimento
  */
 
-import java.util.ArrayList;
 
-public class LES<Quarto> {
-    public LES(int n){
+
+public class LES {
+    public LES(){
         this.n = 0;
-        ArrayList<Quarto> e = new ArrayList<>();
+        list = new Quarto[n];
     }
 
     public int getN() {
@@ -26,18 +26,54 @@ public class LES<Quarto> {
         this.n = n;
     }
     
-    /*public boolean insere(Quarto q){
+    public boolean insere(Quarto q){
         if(n<50)
             return false;
         int i;
-        for(i=0;i<n;i++ ){
-           
+        for(i=0;i<n && list[i].getNumero()<q.getNumero();i++ );
+        
+        for(int j=n;j>i;j--){
+            list[i] = list[i-1];
         }
+        list[i] = q;
+           
         n++;
         return true;
-    }*/
+    }
+    
+    public boolean remove(Quarto q){
+        if(n<=0){
+            return false;
+        }
+        int i;
+        for(i=0;i<n && list[i].getNumero()!=q.getNumero();i++ );
+        
+        for(int j=i;j<n;j++){
+            list[j] = list[j+1];
+        }
+        if(i>=n){
+            return false;
+        }else{
+            n--;
+        }
+        return true;
+    }
+    
+    public Quarto busca(Quarto q){
+        if(n<=0){
+            return null;
+        }
+        int i;
+        for(i=0;i<n && list[i].getNumero()!=q.getNumero();i++ );
+        if(i>=n){
+            return null;
+        }else{
+            return list[i];
+        }
+    }
     
     private int n;
+    private Quarto list[];
     
     
     

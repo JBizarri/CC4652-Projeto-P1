@@ -5,6 +5,10 @@
  */
 package Telas;
 
+import hotel.Fila;
+import hotel.LDE;
+import hotel.LES;
+
 /**
  *
  * @author unifjbizarri
@@ -14,8 +18,19 @@ public class CheckOut extends javax.swing.JFrame {
     /**
      * Creates new form CheckOut
      */
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
     public CheckOut() {
         initComponents();
+    }
+    
+    public CheckOut(LDE ldeParameter, LES lesParameter, Fila filaParameter){
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+        
     }
 
     /**
@@ -57,10 +72,11 @@ public class CheckOut extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarOutActionPerformed
-        new Recepcao().setVisible(true);
+        new Recepcao(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarOutActionPerformed
 

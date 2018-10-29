@@ -9,13 +9,25 @@ package Telas;
  *
  * @author unifjbizarri
  */
+import hotel.*;
 public class Gerenciamento extends javax.swing.JFrame {
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
 
     /**
      * Creates new form Gerenciamento
      */
     public Gerenciamento() {
         initComponents();
+    }
+    
+    public Gerenciamento(LDE ldeParameter, LES lesParameter, Fila filaParameter) {
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+        
     }
 
     /**
@@ -84,20 +96,21 @@ public class Gerenciamento extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarGerenciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarGerenciamentoActionPerformed
-        new Menu().setVisible(true);
+        new Menu(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarGerenciamentoActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        new Alterar().setVisible(true);
+        new Alterar(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnListagemGerenciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListagemGerenciamentoActionPerformed
-        new Listagem().setVisible(true);
+        new Listagem(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnListagemGerenciamentoActionPerformed
 

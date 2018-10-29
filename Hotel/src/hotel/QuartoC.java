@@ -11,7 +11,7 @@ package hotel;
  */
 public class QuartoC extends Quarto{
     
-    public QuartoC(int numero, float preco) {
+    public QuartoC(int numero) {
         super(numero, 35);
     }
     

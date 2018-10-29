@@ -5,6 +5,12 @@
  */
 package Telas;
 
+import hotel.Fila;
+import hotel.LDE;
+import hotel.LES;
+import hotel.Pessoa;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author unifjbizarri
@@ -14,8 +20,34 @@ public class Alterar extends javax.swing.JFrame {
     /**
      * Creates new form Alterar
      */
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
+    Pessoa p;
     public Alterar() {
         initComponents();
+    }
+    
+    public Alterar(LDE ldeParameter, LES lesParameter, Fila filaParameter){
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+        
+        txtNomeAlterar.setVisible(false);
+        txtEnderecoAlterar.setVisible(false);
+        txtCidadeAlterar.setVisible(false);
+        txtContatoAlterar.setVisible(false);
+        txtCpfAlterar.setVisible(false);
+        
+        lbNomeAlterar.setVisible(false);
+        lbEnderecoAlterar.setVisible(false);
+        lbCidadeAlterar.setVisible(false);
+        lbContatoAlterar.setVisible(false);
+        lbCpfAlterar.setVisible(false);
+        
+        btnAlterar.setVisible(false);
+         
     }
 
     /**
@@ -28,6 +60,20 @@ public class Alterar extends javax.swing.JFrame {
     private void initComponents() {
 
         btnVoltarAlterar = new javax.swing.JButton();
+        lbMsg = new javax.swing.JLabel();
+        txtCpfBusca = new javax.swing.JTextField();
+        btnBusca = new javax.swing.JButton();
+        lbNomeAlterar = new javax.swing.JLabel();
+        lbEnderecoAlterar = new javax.swing.JLabel();
+        lbCidadeAlterar = new javax.swing.JLabel();
+        lbContatoAlterar = new javax.swing.JLabel();
+        lbCpfAlterar = new javax.swing.JLabel();
+        txtNomeAlterar = new javax.swing.JTextField();
+        txtEnderecoAlterar = new javax.swing.JTextField();
+        txtCidadeAlterar = new javax.swing.JTextField();
+        txtContatoAlterar = new javax.swing.JTextField();
+        txtCpfAlterar = new javax.swing.JTextField();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,30 +84,157 @@ public class Alterar extends javax.swing.JFrame {
             }
         });
 
+        lbMsg.setText("Digite o CPF da Pessoa que deseja editar");
+
+        btnBusca.setText("Buscar");
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaActionPerformed(evt);
+            }
+        });
+
+        lbNomeAlterar.setText("Nome");
+
+        lbEnderecoAlterar.setText("Endereço");
+
+        lbCidadeAlterar.setText("Cidade");
+
+        lbContatoAlterar.setText("Contato");
+
+        lbCpfAlterar.setText("CPF");
+
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
-                .addComponent(btnVoltarAlterar)
-                .addGap(168, 168, 168))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addComponent(btnVoltarAlterar)
+                        .addGap(168, 168, 168))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbMsg)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCpfBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBusca))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNomeAlterar)
+                                    .addComponent(lbEnderecoAlterar)
+                                    .addComponent(lbCidadeAlterar)
+                                    .addComponent(lbContatoAlterar)
+                                    .addComponent(lbCpfAlterar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCpfAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(txtContatoAlterar)
+                                    .addComponent(txtCidadeAlterar)
+                                    .addComponent(txtEnderecoAlterar)
+                                    .addComponent(txtNomeAlterar))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(358, Short.MAX_VALUE)
-                .addComponent(btnVoltarAlterar)
+                .addGap(34, 34, 34)
+                .addComponent(lbMsg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCpfBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBusca))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNomeAlterar)
+                    .addComponent(txtNomeAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEnderecoAlterar)
+                    .addComponent(txtEnderecoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCidadeAlterar)
+                    .addComponent(txtCidadeAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbContatoAlterar)
+                    .addComponent(txtContatoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCpfAlterar)
+                    .addComponent(txtCpfAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltarAlterar)
+                    .addComponent(btnAlterar))
                 .addGap(19, 19, 19))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarAlterarActionPerformed
-        new Gerenciamento().setVisible(true);
+        new Gerenciamento(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarAlterarActionPerformed
+
+    private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
+        int cpf = Integer.parseInt(txtCpfBusca.getText());
+        p = lde.busca(cpf);
+        if(p!=null){
+            txtNomeAlterar.setVisible(true);
+            txtEnderecoAlterar.setVisible(true);
+            txtCidadeAlterar.setVisible(true);
+            txtContatoAlterar.setVisible(true);
+            txtCpfAlterar.setVisible(true);
+
+            lbNomeAlterar.setVisible(true);
+            lbEnderecoAlterar.setVisible(true);
+            lbCidadeAlterar.setVisible(true);
+            lbContatoAlterar.setVisible(true);
+            lbCpfAlterar.setVisible(true);
+            
+            btnAlterar.setVisible(true);
+        
+            txtNomeAlterar.setText(p.getNome());
+            txtEnderecoAlterar.setText(p.getEndereco());
+            txtCidadeAlterar.setText(p.getCidade());
+            txtContatoAlterar.setText(p.getContato());
+            txtCpfAlterar.setText(Integer.toString(p.getCpf()));
+        }else{
+            JOptionPane.showMessageDialog(null, "Pessoa não encontrada", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscaActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        String nome = txtNomeAlterar.getText();
+        String endereco = txtEnderecoAlterar.getText();
+        String cidade = txtCidadeAlterar.getText();
+        String contato = txtContatoAlterar.getText();
+        int cpfAlterar = Integer.parseInt(txtCpfAlterar.getText());
+        
+        p.setNome(nome);
+        p.setEndereco(endereco);
+        p.setCidade(cidade);
+        p.setContato(contato);
+        p.setCpf(cpfAlterar);
+        
+        JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+        
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,6 +272,20 @@ public class Alterar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnBusca;
     private javax.swing.JButton btnVoltarAlterar;
+    private javax.swing.JLabel lbCidadeAlterar;
+    private javax.swing.JLabel lbContatoAlterar;
+    private javax.swing.JLabel lbCpfAlterar;
+    private javax.swing.JLabel lbEnderecoAlterar;
+    private javax.swing.JLabel lbMsg;
+    private javax.swing.JLabel lbNomeAlterar;
+    private javax.swing.JTextField txtCidadeAlterar;
+    private javax.swing.JTextField txtContatoAlterar;
+    private javax.swing.JTextField txtCpfAlterar;
+    private javax.swing.JTextField txtCpfBusca;
+    private javax.swing.JTextField txtEnderecoAlterar;
+    private javax.swing.JTextField txtNomeAlterar;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,17 +5,33 @@
  */
 package Telas;
 
+import hotel.Fila;
+import hotel.LDE;
+import hotel.LES;
+import hotel.Pessoa;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author unifjbizarri
  */
-public class Cadastro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Cadastro
-     */
-    public Cadastro() {
+public class Cadastro extends javax.swing.JFrame {
+    
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
+    
+    public Cadastro(){
         initComponents();
+    }
+    
+    
+    public Cadastro(LDE ldeParameter, LES lesParameter, Fila filaParameter) {
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
     }
 
     /**
@@ -38,6 +54,9 @@ public class Cadastro extends javax.swing.JFrame {
         lbHint = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
         btnVoltarCadastro = new javax.swing.JButton();
+        lbCpf = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        lbHint1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -50,7 +69,6 @@ public class Cadastro extends javax.swing.JFrame {
 
         lbContato.setText("Contato");
 
-        txtNome.setPreferredSize(new java.awt.Dimension(6, 20));
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
@@ -72,6 +90,11 @@ public class Cadastro extends javax.swing.JFrame {
         lbHint.setText("Apenas Números");
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnVoltarCadastro.setText("Voltar");
         btnVoltarCadastro.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +103,16 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        lbCpf.setText("CPF");
+
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfActionPerformed(evt);
+            }
+        });
+
+        lbHint1.setText("Apenas Números");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,46 +120,65 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbContato)
                     .addComponent(lbNome)
                     .addComponent(lbEndereco)
                     .addComponent(lbCidade)
-                    .addComponent(lbContato))
+                    .addComponent(lbCpf))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEndereco)
-                    .addComponent(txtCidade)
-                    .addComponent(txtContato)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtCpf)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbHint1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEndereco)
+                        .addGap(200, 200, 200))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCadastrar)
-                        .addGap(0, 39, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbHint, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltarCadastro))
-                .addGap(83, 83, 83))
+                        .addGap(18, 57, Short.MAX_VALUE)
+                        .addComponent(btnVoltarCadastro)
+                        .addGap(121, 121, 121))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNome)
+                        .addGap(200, 200, 200))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtContato, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCidade))
+                        .addGap(18, 18, 18)
+                        .addComponent(lbHint, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbEndereco)
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbCidade)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbContato)
-                    .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbHint))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbHint)))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCpf)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbHint1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnVoltarCadastro))
@@ -136,6 +188,7 @@ public class Cadastro extends javax.swing.JFrame {
         txtContato.getAccessibleContext().setAccessibleDescription("Contato, apenas numeros");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -151,9 +204,30 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContatoActionPerformed
 
     private void btnVoltarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarCadastroActionPerformed
-        new Menu().setVisible(true);
+        new Menu(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarCadastroActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        String nome = txtNome.getText();
+        String endereco = txtEndereco.getText();
+        String cidade = txtCidade.getText();
+        String contato = txtContato.getText();
+        int cpf = Integer.parseInt(txtCpf.getText());
+        
+        Pessoa p = new Pessoa(nome,endereco,cidade,contato,cpf);
+        lde.insere(p);
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
+        txtNome.setText("");
+        txtEndereco.setText("");
+        txtCidade.setText("");
+        txtContato.setText("");
+        txtCpf.setText("");
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,11 +269,14 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltarCadastro;
     private javax.swing.JLabel lbCidade;
     private javax.swing.JLabel lbContato;
+    private javax.swing.JLabel lbCpf;
     private javax.swing.JLabel lbEndereco;
     private javax.swing.JLabel lbHint;
+    private javax.swing.JLabel lbHint1;
     private javax.swing.JLabel lbNome;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtContato;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables

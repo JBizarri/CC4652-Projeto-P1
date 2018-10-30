@@ -9,14 +9,33 @@ package Telas;
  *
  * @author unifjbizarri
  */
+import hotel.*;
+
 public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
+     * @param ldeParameter
+     * @param lesParameter
+     * @param filaParameter
      */
-    public Menu() {
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
+     
+    public Menu(){
         initComponents();
     }
+
+    public Menu(LDE ldeParameter, LES lesParameter, Fila filaParameter) {
+
+        initComponents();
+
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +55,6 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 400));
         setMinimumSize(new java.awt.Dimension(400, 400));
-        setPreferredSize(new java.awt.Dimension(400, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(400, 400));
 
@@ -115,15 +133,16 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRecepcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecepcaoActionPerformed
-        new Recepcao().setVisible(true);
+        new Recepcao(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRecepcaoActionPerformed
 
     private void btnGerenciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciamentoActionPerformed
-        new Gerenciamento().setVisible(true);
+        new Gerenciamento(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnGerenciamentoActionPerformed
 
@@ -132,7 +151,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        new Cadastro().setVisible(true);
+        new Cadastro(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCadastroActionPerformed
 

@@ -9,13 +9,26 @@ package Telas;
  *
  * @author unifjbizarri
  */
+import hotel.*;
 public class Recepcao extends javax.swing.JFrame {
 
     /**
      * Creates new form Recepcao
      */
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
+    
     public Recepcao() {
         initComponents();
+    }
+    
+    public Recepcao(LDE ldeParameter, LES lesParameter, Fila filaParameter){
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+        
     }
 
     /**
@@ -111,10 +124,11 @@ public class Recepcao extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarRecepcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarRecepcaoActionPerformed
-        new Menu().setVisible(true);
+        new Menu(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarRecepcaoActionPerformed
 
@@ -129,7 +143,7 @@ public class Recepcao extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOutActionPerformed
 
     private void btnListagemRecepcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListagemRecepcaoActionPerformed
-        new Listagem().setVisible(true);
+        new Listagem(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnListagemRecepcaoActionPerformed
 

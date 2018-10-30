@@ -5,17 +5,51 @@
  */
 package Telas;
 
+import hotel.Fila;
+import hotel.LDE;
+import hotel.LES;
+import hotel.QuartoA;
+import hotel.QuartoB;
+import hotel.QuartoC;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author unifjbizarri
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
-    public Login() {
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
+    
+    
+    public Login(){
         initComponents();
+    }
+    
+    public Login(LDE ldeParameter, LES lesParameter, Fila filaParameter) {
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+        
+        if(les.getN()==0){
+            for(int i =1;i<=35;i++){
+                QuartoC c = new QuartoC(i);
+                les.insere(c);
+            }
+            for(int i=36;i<=45;i++){
+                QuartoB b = new QuartoB(i);
+                les.insere(b);
+            }
+
+            for(int i=46;i<=50;i++){
+                QuartoA a = new QuartoA(i);
+                les.insere(a);
+            }
+        }
+    
     }
 
     /**
@@ -66,7 +100,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLogin)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbSenha)
                             .addComponent(lbLogin))
                         .addGap(18, 18, 18)
@@ -88,10 +122,11 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(btnLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
@@ -99,8 +134,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new Menu().setVisible(true);
-        dispose();
+        
+        if(txtLogin.getText().toString().equals("admin") && txtSenha.getText().equals("123")) {
+            new Menu(lde,les,fila).setVisible(true);
+            dispose();           
+        } else {
+            txtLogin.setText("");
+            txtSenha.setText("");
+            JOptionPane.showMessageDialog(null, "Login ou Senha incorretos", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+            
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -131,6 +174,7 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

@@ -5,6 +5,10 @@
  */
 package Telas;
 
+import hotel.Fila;
+import hotel.LDE;
+import hotel.LES;
+
 /**
  *
  * @author unifjbizarri
@@ -14,9 +18,23 @@ public class Reserva extends javax.swing.JFrame {
     /**
      * Creates new form Reserva
      */
+    LDE lde = new LDE();
+    LES les = new LES();
+    Fila fila = new Fila();
+    
     public Reserva() {
         initComponents();
     }
+    
+    public Reserva(LDE ldeParameter, LES lesParameter, Fila filaParameter){
+        initComponents();
+        lde = ldeParameter;
+        les = lesParameter;
+        fila = filaParameter;
+        
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,10 +75,11 @@ public class Reserva extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarReservaActionPerformed
-        new Recepcao().setVisible(true);
+        new Recepcao(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarReservaActionPerformed
 

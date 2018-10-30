@@ -8,9 +8,15 @@ package Telas;
 import hotel.Fila;
 import hotel.LDE;
 import hotel.LES;
+import hotel.Pessoa;
 import hotel.QuartoA;
 import hotel.QuartoB;
 import hotel.QuartoC;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +28,66 @@ public class Login extends javax.swing.JFrame {
     LDE lde = new LDE();
     LES les = new LES();
     Fila fila = new Fila();
+    Pessoa p;
     
     
     public Login(){
         initComponents();
+        if(lde.getN()==0){
+            try{
+                FileInputStream arquivo = new FileInputStream("cadastro.txt");
+                InputStreamReader input = new InputStreamReader(arquivo);
+                BufferedReader br = new BufferedReader(input);
+                BufferedReader br2 = new BufferedReader(input);
+                
+                String linha,temp;
+                ArrayList<String> info = new ArrayList();
+                int i=0;
+                do{
+                    temp = br.readLine();
+                    
+                    if(temp != null){
+                        info.add(temp);
+                        i++;
+                    }
+                }while(temp != null);
+                
+                for(int j=0;j<(info.size()/6);j++){
+                    p.setNome(info.get(j));
+                    p.setEndereco(info.get(j+1));
+                    p.setCidade(info.get(j+2));
+                    p.setContato(info.get(j+3));
+                    p.setCpf(Integer.parseInt(info.get(j+4)));
+                    if("false".equals(info.get(j+5))){
+                        p.setHospedado(false);
+                    }else{
+                        p.setHospedado(true);
+                    }
+                    lde.insere(p);
+                    /*linha = br2.readLine();
+                    p.setNome(linha);
+                    linha = br2.readLine();
+                    p.setEndereco(linha);
+                    linha = br2.readLine();
+                    p.setCidade(linha);
+                    linha = br2.readLine();
+                    p.setContato(linha);
+                    linha = br2.readLine();
+                    p.setCpf(Integer.parseInt(linha));
+                    linha = br2.readLine();
+                    
+                    if(linha.equals("false")){
+                        p.setHospedado(false);
+                    }else{
+                        p.setHospedado(true);
+                    }*/
+                }
+                
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            
+        }
     }
     
     public Login(LDE ldeParameter, LES lesParameter, Fila filaParameter) {
@@ -33,6 +95,7 @@ public class Login extends javax.swing.JFrame {
         lde = ldeParameter;
         les = lesParameter;
         fila = filaParameter;
+        
         
         if(les.getN()==0){
             for(int i =1;i<=35;i++){
@@ -70,7 +133,6 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 400));
         setMinimumSize(new java.awt.Dimension(400, 400));
-        setPreferredSize(new java.awt.Dimension(400, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(400, 400));
 
@@ -81,6 +143,12 @@ public class Login extends javax.swing.JFrame {
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLoginActionPerformed(evt);
+            }
+        });
+
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
             }
         });
 
@@ -145,6 +213,11 @@ public class Login extends javax.swing.JFrame {
         }
             
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        this.getRootPane().setDefaultButton(btnLogin);
+        btnLogin.doClick();
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
     /**
      * @param args the command line arguments

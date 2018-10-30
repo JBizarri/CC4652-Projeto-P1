@@ -9,6 +9,8 @@ import hotel.Fila;
 import hotel.LDE;
 import hotel.LES;
 import hotel.Pessoa;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -217,6 +219,23 @@ public class Cadastro extends javax.swing.JFrame {
         
         Pessoa p = new Pessoa(nome,endereco,cidade,contato,cpf);
         lde.insere(p);
+        try{
+            
+            
+            FileOutputStream arquivo = new FileOutputStream("cadastro.txt",true);
+            PrintWriter pr = new PrintWriter(arquivo);
+            pr.println(p.getNome());
+            pr.println(p.getEndereco());
+            pr.println(p.getCidade());
+            pr.println(p.getContato());
+            pr.println(p.getCpf());
+            pr.println(p.isHospedado());
+            pr.close();
+            arquivo.close();
+            
+        }catch(Exception e){
+            System.out.println("Erro ao escrever o arquivo");
+        }
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
         txtNome.setText("");
         txtEndereco.setText("");

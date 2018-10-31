@@ -167,7 +167,7 @@ public class Remover extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarOutActionPerformed
-        new Recepcao(lde,les,fila).setVisible(true);
+        new Gerenciamento(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarOutActionPerformed
 

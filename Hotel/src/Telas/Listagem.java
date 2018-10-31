@@ -137,7 +137,8 @@ public class Listagem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarListagemActionPerformed
 
     private void txtCpfBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfBuscaActionPerformed
-        // TODO add your handling code here:
+        this.getRootPane().setDefaultButton(btnBuscar);
+        btnBuscar.doClick();
     }//GEN-LAST:event_txtCpfBuscaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

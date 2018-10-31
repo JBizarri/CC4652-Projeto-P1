@@ -214,42 +214,47 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarCadastroActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        String nome = txtNome.getText();
-        String endereco = txtEndereco.getText();
-        String cidade = txtCidade.getText();
-        String contato = txtContato.getText();
-        int cpf = Integer.parseInt(txtCpf.getText());
-        
-        Pessoa p = new Pessoa(nome,endereco,cidade,contato,cpf);
-        lde.insere(p);
         try{
-            FileOutputStream arquivo = new FileOutputStream("cadastro.txt",true);
-            PrintWriter pr = new PrintWriter(arquivo);
-            pr.println(p.getNome());
-            pr.println(p.getEndereco());
-            pr.println(p.getCidade());
-            pr.println(p.getContato());
-            pr.println(p.getCpf());
-            pr.println(p.isHospedado());
-            pr.close();
-            arquivo.close();
-            
+            String nome = txtNome.getText();
+            String endereco = txtEndereco.getText();
+            String cidade = txtCidade.getText();
+            String contato = txtContato.getText();
+            int cpf = Integer.parseInt(txtCpf.getText());
+
+            Pessoa p = new Pessoa(nome,endereco,cidade,contato,cpf);
+            lde.insere(p);
+            try{
+                FileOutputStream arquivo = new FileOutputStream("cadastro.txt",true);
+                PrintWriter pr = new PrintWriter(arquivo);
+                pr.println(p.getNome());
+                pr.println(p.getEndereco());
+                pr.println(p.getCidade());
+                pr.println(p.getContato());
+                pr.println(p.getCpf());
+                pr.println(p.isHospedado());
+                pr.close();
+                arquivo.close();
+
+            }catch(Exception e){
+                System.out.println("Erro ao escrever o arquivo");
+            }
+
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
+            txtNome.setText("");
+            txtEndereco.setText("");
+            txtCidade.setText("");
+            txtContato.setText("");
+            txtCpf.setText("");
         }catch(Exception e){
-            System.out.println("Erro ao escrever o arquivo");
+            JOptionPane.showMessageDialog(null, "Erro: certifique-se de preencher todos os campos","Erro",JOptionPane.ERROR_MESSAGE);     
         }
-        
-        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
-        txtNome.setText("");
-        txtEndereco.setText("");
-        txtCidade.setText("");
-        txtContato.setText("");
-        txtCpf.setText("");
         
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO add your handling code here:
+        this.getRootPane().setDefaultButton(btnCadastrar);
+        btnCadastrar.doClick();
     }//GEN-LAST:event_txtCpfActionPerformed
 
     /**

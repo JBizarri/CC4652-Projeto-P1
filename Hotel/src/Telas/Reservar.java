@@ -95,6 +95,12 @@ public class Reservar extends javax.swing.JFrame {
 
         lbCpf.setText("CPF");
 
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfActionPerformed(evt);
+            }
+        });
+
         lbNome.setText("Nome");
 
         lbEndereco.setText("Endereço");
@@ -232,7 +238,8 @@ public class Reservar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarInActionPerformed
 
     private void txtEstadiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstadiaActionPerformed
-        // TODO add your handling code here:
+        this.getRootPane().setDefaultButton(btnCalcular);
+        btnCalcular.doClick();
     }//GEN-LAST:event_txtEstadiaActionPerformed
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
@@ -280,28 +287,37 @@ public class Reservar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        int quarto = Integer.parseInt(txtQuarto.getText());
-        int dias = Integer.parseInt(txtEstadia.getText());
-        
-        q = les.busca(quarto);
-        if(q!=null){
-            if(q.isReservado()==false){
-                
-                q.setTempo(dias);
-                float precoFinal = q.precoTotal();
-                lbMensagem.setText("Preço final: "+precoFinal);
-                lbMensagem.setVisible(true);
-                btnReservar.setVisible(true);
-                
+        try{    
+            int quarto = Integer.parseInt(txtQuarto.getText());
+            int dias = Integer.parseInt(txtEstadia.getText());
+
+            q = les.busca(quarto);
+            if(q!=null){
+                if(q.isReservado()==false){
+
+                    q.setTempo(dias);
+                    float precoFinal = q.precoTotal();
+                    lbMensagem.setText("Preço final: "+precoFinal);
+                    lbMensagem.setVisible(true);
+                    btnReservar.setVisible(true);
+
+                }else{
+                   lbMensagem.setText("O Quarto já está reservado");
+                   lbMensagem.setVisible(true);   
+                }
             }else{
-               lbMensagem.setText("O Quarto já está reservado");
-               lbMensagem.setVisible(true);   
+                lbMensagem.setText("Quarto inexistente");
+                lbMensagem.setVisible(true);
             }
-        }else{
-            lbMensagem.setText("Quarto inexistente");
-            lbMensagem.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro: certifique-se de preencher todos os campos","Erro",JOptionPane.ERROR_MESSAGE);     
         }
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        this.getRootPane().setDefaultButton(btnBuscar);
+        btnBuscar.doClick();
+    }//GEN-LAST:event_txtCpfActionPerformed
 
     /**
      * @param args the command line arguments

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author unifjbizarri
  */
-public class CheckOut extends javax.swing.JFrame {
+public class Remover extends javax.swing.JFrame {
 
     /**
      * Creates new form CheckOut
@@ -27,11 +27,11 @@ public class CheckOut extends javax.swing.JFrame {
     int cpf;
     Pessoa p;
     Quarto q;
-    public CheckOut() {
+    public Remover() {
         initComponents();
     }
     
-    public CheckOut(LDE ldeParameter, LES lesParameter, Fila filaParameter){
+    public Remover(LDE ldeParameter, LES lesParameter, Fila filaParameter){
         initComponents();
         lde = ldeParameter;
         les = lesParameter;
@@ -43,7 +43,7 @@ public class CheckOut extends javax.swing.JFrame {
         lbContato.setVisible(false);
         lbHospedado.setVisible(false);
 
-        btnCheckOut.setVisible(false);
+        btnRemover.setVisible(false);
         
         
     }
@@ -66,7 +66,7 @@ public class CheckOut extends javax.swing.JFrame {
         lbCidade = new javax.swing.JLabel();
         lbContato = new javax.swing.JLabel();
         lbHospedado = new javax.swing.JLabel();
-        btnCheckOut = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -103,10 +103,10 @@ public class CheckOut extends javax.swing.JFrame {
 
         lbHospedado.setText("Hospedado(Quarto)");
 
-        btnCheckOut.setText("Check-Out");
-        btnCheckOut.addActionListener(new java.awt.event.ActionListener() {
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheckOutActionPerformed(evt);
+                btnRemoverActionPerformed(evt);
             }
         });
 
@@ -118,8 +118,8 @@ public class CheckOut extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCheckOut)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addComponent(btnRemover)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(btnVoltarOut)
                         .addGap(159, 159, 159))
                     .addGroup(layout.createSequentialGroup()
@@ -158,7 +158,7 @@ public class CheckOut extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltarOut)
-                    .addComponent(btnCheckOut))
+                    .addComponent(btnRemover))
                 .addContainerGap())
         );
 
@@ -175,40 +175,38 @@ public class CheckOut extends javax.swing.JFrame {
         cpf = Integer.parseInt(txtCpf.getText());
         p = lde.busca(cpf);
         if(p!=null){
-            if(p.isHospedado()==true){
-                lbNome.setVisible(true);
-                lbEndereco.setVisible(true);
-                lbCidade.setVisible(true);
-                lbContato.setVisible(true);
-                lbHospedado.setVisible(true);
-                btnCheckOut.setVisible(true);
+            
+            lbNome.setVisible(true);
+            lbEndereco.setVisible(true);
+            lbCidade.setVisible(true);
+            lbContato.setVisible(true);
+            lbHospedado.setVisible(true);
+            btnRemover.setVisible(true);
 
-                lbNome.setText(p.getNome());
-                lbEndereco.setText(p.getEndereco());
-                lbCidade.setText(p.getCidade());
-                lbContato.setText(p.getContato());
+            lbNome.setText(p.getNome());
+            lbEndereco.setText(p.getEndereco());
+            lbCidade.setText(p.getCidade());
+            lbContato.setText(p.getContato());
+            if(p.isHospedado()==true){
                 lbHospedado.setText("Hospedado no quarto "+p.getQuarto());
             }else{
-                JOptionPane.showMessageDialog(null, "Pessoa não hospedada", "Alert", JOptionPane.ERROR_MESSAGE);
+               lbHospedado.setText("Não hospedado"); 
             }
+            
             
         }else{
             JOptionPane.showMessageDialog(null, "Pessoa não encontrada", "Alert", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         cpf = Integer.parseInt(txtCpf.getText());
         p = lde.busca(cpf);
-        q = les.busca(p.getQuarto());
-
-        q.setOcupado(false);
-        p.setHospedado(false);
-        p.setQuarto(-1);
-        JOptionPane.showMessageDialog(null, "Check-Out com sucesso");
+        lde.remove(p);
+        JOptionPane.showMessageDialog(null, "Removido com sucesso com sucesso");
        new Recepcao(lde,les,fila).setVisible(true);
        dispose();
-    }//GEN-LAST:event_btnCheckOutActionPerformed
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
         this.getRootPane().setDefaultButton(btnBuscar);
@@ -232,27 +230,28 @@ public class CheckOut extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CheckOut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CheckOut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CheckOut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CheckOut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CheckOut().setVisible(true);
+                new Remover().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCheckOut;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltarOut;
     private javax.swing.JLabel lbCidade;
     private javax.swing.JLabel lbContato;

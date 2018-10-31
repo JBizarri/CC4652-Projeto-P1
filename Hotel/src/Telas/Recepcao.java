@@ -133,12 +133,12 @@ public class Recepcao extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarRecepcaoActionPerformed
 
     private void btnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInActionPerformed
-        new CheckIn().setVisible(true);
+        new CheckIn(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnInActionPerformed
 
     private void btnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutActionPerformed
-        new CheckOut().setVisible(true);
+        new CheckOut(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnOutActionPerformed
 
@@ -148,7 +148,7 @@ public class Recepcao extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListagemRecepcaoActionPerformed
 
     private void btnReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservaActionPerformed
-        new Reserva().setVisible(true);
+        new Reserva(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnReservaActionPerformed
 

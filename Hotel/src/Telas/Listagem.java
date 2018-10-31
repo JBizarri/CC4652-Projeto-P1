@@ -49,6 +49,7 @@ public class Listagem extends javax.swing.JFrame {
         lbContatoBusca = new javax.swing.JLabel();
         lbCpfBusca = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
+        lbHospedado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,6 +87,7 @@ public class Listagem extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbHospedado)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbCpfAviso)
                         .addGap(18, 18, 18)
@@ -118,7 +120,9 @@ public class Listagem extends javax.swing.JFrame {
                 .addComponent(lbContatoBusca)
                 .addGap(18, 18, 18)
                 .addComponent(lbCpfBusca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lbHospedado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addComponent(btnVoltarListagem)
                 .addContainerGap())
         );
@@ -145,6 +149,11 @@ public class Listagem extends javax.swing.JFrame {
             lbCidadeBusca.setText(p.getCidade());
             lbContatoBusca.setText(p.getContato());
             lbCpfBusca.setText(Integer.toString(p.getCpf()));
+            if(p.isHospedado()==true){
+                lbHospedado.setText("Hospedado no quarto "+p.getQuarto());
+            }else{
+                lbHospedado.setText("Não Hospedado");
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Pessoa não encontrada", "Alert", JOptionPane.ERROR_MESSAGE);
         }
@@ -193,6 +202,7 @@ public class Listagem extends javax.swing.JFrame {
     private javax.swing.JLabel lbCpfAviso;
     private javax.swing.JLabel lbCpfBusca;
     private javax.swing.JLabel lbEnderecoBusca;
+    private javax.swing.JLabel lbHospedado;
     private javax.swing.JLabel lbNomeBusca;
     private javax.swing.JTextField txtCpfBusca;
     // End of variables declaration//GEN-END:variables

@@ -32,6 +32,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbHospedado" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="lbCpfAviso" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -70,7 +71,9 @@
               <Component id="lbContatoBusca" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbCpfBusca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="170" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lbHospedado" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="152" max="32767" attributes="0"/>
               <Component id="btnVoltarListagem" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -113,6 +116,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbHospedado">
     </Component>
   </SubComponents>
 </Form>

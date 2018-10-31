@@ -12,7 +12,7 @@ package hotel;
 public class QuartoB extends Quarto {
     
     public QuartoB(int numero) {
-        super(numero, 60);
+        super(numero, 60,2);
     }
     
 }

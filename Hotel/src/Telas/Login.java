@@ -12,11 +12,12 @@ import hotel.Pessoa;
 import hotel.QuartoA;
 import hotel.QuartoB;
 import hotel.QuartoC;
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,51 +39,54 @@ public class Login extends javax.swing.JFrame {
                 FileInputStream arquivo = new FileInputStream("cadastro.txt");
                 InputStreamReader input = new InputStreamReader(arquivo);
                 BufferedReader br = new BufferedReader(input);
-                BufferedReader br2 = new BufferedReader(input);
+                BufferedReader br2;
                 
                 String linha,temp;
-                ArrayList<String> info = new ArrayList();
+                ArrayList<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+                ArrayList<String> list1 = new ArrayList<String>();
+                
                 int i=0;
                 do{
                     temp = br.readLine();
                     
+                    
                     if(temp != null){
-                        info.add(temp);
                         i++;
                     }
-                }while(temp != null);
+                    
+                }while(temp != null); //Para descobrir quantidade de linhas
+                //System.out.println(i);
                 
-                for(int j=0;j<(info.size()/6);j++){
-                    p.setNome(info.get(j));
-                    p.setEndereco(info.get(j+1));
-                    p.setCidade(info.get(j+2));
-                    p.setContato(info.get(j+3));
-                    p.setCpf(Integer.parseInt(info.get(j+4)));
-                    if("false".equals(info.get(j+5))){
+                
+                arquivo.getChannel().position(0);
+                br2 = new BufferedReader(new InputStreamReader(arquivo));
+                for(int k=0;k<(i/6);k++){   //Deveria preencher a lista para cada pessoa com suas informações
+                    for(int j = 0;j<6;j++){
+                        linha = br2.readLine();
+                        list1.add(linha);
+                    }
+                    info.add(list1);
+                    list1.clear();
+                }
+                
+               
+                
+                
+                for(int c=0;c<(i/6);c++){ // Para então adicionar na LDE
+
+                    p.setNome(info.get(c).get(0));
+                    p.setEndereco(info.get(c).get(1));
+                    p.setCidade(info.get(c).get(2));
+                    p.setContato(info.get(c).get(3));
+                    p.setCpf(Integer.parseInt(info.get(c).get(4)));
+                    if("false".equals(info.get(c).get(5))){
                         p.setHospedado(false);
                     }else{
                         p.setHospedado(true);
                     }
                     lde.insere(p);
-                    /*linha = br2.readLine();
-                    p.setNome(linha);
-                    linha = br2.readLine();
-                    p.setEndereco(linha);
-                    linha = br2.readLine();
-                    p.setCidade(linha);
-                    linha = br2.readLine();
-                    p.setContato(linha);
-                    linha = br2.readLine();
-                    p.setCpf(Integer.parseInt(linha));
-                    linha = br2.readLine();
                     
-                    if(linha.equals("false")){
-                        p.setHospedado(false);
-                    }else{
-                        p.setHospedado(true);
-                    }*/
                 }
-                
             }catch(Exception e){
                 System.out.println(e);
             }
@@ -97,21 +101,6 @@ public class Login extends javax.swing.JFrame {
         fila = filaParameter;
         
         
-        if(les.getN()==0){
-            for(int i =1;i<=35;i++){
-                QuartoC c = new QuartoC(i);
-                les.insere(c);
-            }
-            for(int i=36;i<=45;i++){
-                QuartoB b = new QuartoB(i);
-                les.insere(b);
-            }
-
-            for(int i=46;i<=50;i++){
-                QuartoA a = new QuartoA(i);
-                les.insere(a);
-            }
-        }
     
     }
 
@@ -210,6 +199,22 @@ public class Login extends javax.swing.JFrame {
             txtLogin.setText("");
             txtSenha.setText("");
             JOptionPane.showMessageDialog(null, "Login ou Senha incorretos", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(les.getN()==0){
+            for(int i =1;i<=35;i++){
+                QuartoC c = new QuartoC(i);
+                les.insere(c);
+            }
+            for(int i=36;i<=45;i++){
+                QuartoB b = new QuartoB(i);
+                les.insere(b);
+            }
+
+            for(int i=46;i<=50;i++){
+                QuartoA a = new QuartoA(i);
+                les.insere(a);
+            }
         }
             
     }//GEN-LAST:event_btnLoginActionPerformed

@@ -8,6 +8,9 @@ package Telas;
 import hotel.Fila;
 import hotel.LDE;
 import hotel.LES;
+import hotel.Pessoa;
+import hotel.Quarto;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +24,9 @@ public class CheckOut extends javax.swing.JFrame {
     LDE lde = new LDE();
     LES les = new LES();
     Fila fila = new Fila();
+    int cpf;
+    Pessoa p;
+    Quarto q;
     public CheckOut() {
         initComponents();
     }
@@ -30,6 +36,15 @@ public class CheckOut extends javax.swing.JFrame {
         lde = ldeParameter;
         les = lesParameter;
         fila = filaParameter;
+        
+        lbNome.setVisible(false);
+        lbEndereco.setVisible(false);
+        lbCidade.setVisible(false);
+        lbContato.setVisible(false);
+        lbHospedado.setVisible(false);
+
+        btnCheckOut.setVisible(false);
+        
         
     }
 
@@ -43,6 +58,15 @@ public class CheckOut extends javax.swing.JFrame {
     private void initComponents() {
 
         btnVoltarOut = new javax.swing.JButton();
+        lbCpf = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        lbNome = new javax.swing.JLabel();
+        lbEndereco = new javax.swing.JLabel();
+        lbCidade = new javax.swing.JLabel();
+        lbContato = new javax.swing.JLabel();
+        lbHospedado = new javax.swing.JLabel();
+        btnCheckOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -54,20 +78,81 @@ public class CheckOut extends javax.swing.JFrame {
             }
         });
 
+        lbCpf.setText("CPF");
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        lbNome.setText("Nome");
+
+        lbEndereco.setText("Endereço");
+
+        lbCidade.setText("Cidade");
+
+        lbContato.setText("Contato");
+
+        lbHospedado.setText("Hospedado(Quarto)");
+
+        btnCheckOut.setText("Check-Out");
+        btnCheckOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
-                .addComponent(btnVoltarOut)
-                .addGap(159, 159, 159))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCheckOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addComponent(btnVoltarOut)
+                        .addGap(159, 159, 159))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbCpf)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar))
+                            .addComponent(lbNome)
+                            .addComponent(lbEndereco)
+                            .addComponent(lbCidade)
+                            .addComponent(lbContato)
+                            .addComponent(lbHospedado))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(366, Short.MAX_VALUE)
-                .addComponent(btnVoltarOut)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCpf)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
+                .addGap(18, 18, 18)
+                .addComponent(lbNome)
+                .addGap(18, 18, 18)
+                .addComponent(lbEndereco)
+                .addGap(18, 18, 18)
+                .addComponent(lbCidade)
+                .addGap(18, 18, 18)
+                .addComponent(lbContato)
+                .addGap(18, 18, 18)
+                .addComponent(lbHospedado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltarOut)
+                    .addComponent(btnCheckOut))
                 .addContainerGap())
         );
 
@@ -79,6 +164,45 @@ public class CheckOut extends javax.swing.JFrame {
         new Recepcao(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarOutActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        cpf = Integer.parseInt(txtCpf.getText());
+        p = lde.busca(cpf);
+        if(p!=null){
+            if(p.isHospedado()==true){
+                lbNome.setVisible(true);
+                lbEndereco.setVisible(true);
+                lbCidade.setVisible(true);
+                lbContato.setVisible(true);
+                lbHospedado.setVisible(true);
+                btnCheckOut.setVisible(true);
+
+                lbNome.setText(p.getNome());
+                lbEndereco.setText(p.getEndereco());
+                lbCidade.setText(p.getCidade());
+                lbContato.setText(p.getContato());
+                lbHospedado.setText("Hospedado no quarto "+p.getQuarto());
+            }else{
+                JOptionPane.showMessageDialog(null, "Pessoa não hospedada", "Alert", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Pessoa não encontrada", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
+        cpf = Integer.parseInt(txtCpf.getText());
+        p = lde.busca(cpf);
+        q = les.busca(p.getQuarto());
+
+        q.setOcupado(false);
+        p.setHospedado(false);
+        p.setQuarto(-1);
+        JOptionPane.showMessageDialog(null, "Check-Out com sucesso");
+       new Recepcao(lde,les,fila).setVisible(true);
+       dispose();
+    }//GEN-LAST:event_btnCheckOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,6 +240,15 @@ public class CheckOut extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCheckOut;
     private javax.swing.JButton btnVoltarOut;
+    private javax.swing.JLabel lbCidade;
+    private javax.swing.JLabel lbContato;
+    private javax.swing.JLabel lbCpf;
+    private javax.swing.JLabel lbEndereco;
+    private javax.swing.JLabel lbHospedado;
+    private javax.swing.JLabel lbNome;
+    private javax.swing.JTextField txtCpf;
     // End of variables declaration//GEN-END:variables
 }

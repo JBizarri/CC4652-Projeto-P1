@@ -8,6 +8,8 @@ package Telas;
 import hotel.Fila;
 import hotel.LDE;
 import hotel.LES;
+import hotel.Quarto;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Reserva extends javax.swing.JFrame {
     LDE lde = new LDE();
     LES les = new LES();
     Fila fila = new Fila();
+    Quarto q;
     
     public Reserva() {
         initComponents();
@@ -46,6 +49,8 @@ public class Reserva extends javax.swing.JFrame {
     private void initComponents() {
 
         btnVoltarReserva = new javax.swing.JButton();
+        btnReservar = new javax.swing.JButton();
+        btnDesenfileirar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -57,6 +62,20 @@ public class Reserva extends javax.swing.JFrame {
             }
         });
 
+        btnReservar.setText("Reservar");
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservarActionPerformed(evt);
+            }
+        });
+
+        btnDesenfileirar.setText("Desenfileirar");
+        btnDesenfileirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesenfileirarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -65,11 +84,21 @@ public class Reserva extends javax.swing.JFrame {
                 .addContainerGap(177, Short.MAX_VALUE)
                 .addComponent(btnVoltarReserva)
                 .addGap(162, 162, 162))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(btnReservar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnDesenfileirar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(366, Short.MAX_VALUE)
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReservar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDesenfileirar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(btnVoltarReserva)
                 .addContainerGap())
         );
@@ -82,6 +111,24 @@ public class Reserva extends javax.swing.JFrame {
         new Recepcao(lde,les,fila).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarReservaActionPerformed
+
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        new Reservar(lde,les,fila).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnReservarActionPerformed
+
+    private void btnDesenfileirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesenfileirarActionPerformed
+        int n = JOptionPane.showConfirmDialog(this, "Isso irá remover a primeira reserva, deseja realmente prosseguir?","Desenfileirar",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            q = fila.primeiro();
+            q.setReservado(false);
+            fila.remove();
+        } else if (n == JOptionPane.NO_OPTION) {
+
+        } else {
+
+        }
+    }//GEN-LAST:event_btnDesenfileirarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,6 +166,8 @@ public class Reserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDesenfileirar;
+    private javax.swing.JButton btnReservar;
     private javax.swing.JButton btnVoltarReserva;
     // End of variables declaration//GEN-END:variables
 }

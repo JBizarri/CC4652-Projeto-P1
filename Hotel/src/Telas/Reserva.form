@@ -29,12 +29,24 @@
               <Component id="btnVoltarReserva" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+              <Component id="btnReservar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="btnDesenfileirar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="366" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnReservar" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="btnDesenfileirar" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="176" max="32767" attributes="0"/>
               <Component id="btnVoltarReserva" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -48,6 +60,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarReservaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReservar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reservar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReservarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDesenfileirar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Desenfileirar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDesenfileirarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

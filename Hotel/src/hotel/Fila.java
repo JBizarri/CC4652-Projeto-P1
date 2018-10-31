@@ -1,27 +1,26 @@
 
-
 package hotel;
 
 
 public class Fila {
     private int começo;
     private int fim;
-    private Pessoa p[];
+    private Quarto q[];
     private int n;
     
     public Fila(){
         começo = 0;
         fim = 0;
-        p = new Pessoa[51];
+        q = new Quarto[51];
         n = 51;        
     }
     
     
-    public boolean insere(Pessoa pessoa){
+    public boolean insere(Quarto quarto){
         if(((fim+1)%n) == começo){
             return false;
         }
-        p[fim] = pessoa;
+        q[fim] = quarto;
         fim = (fim+1)%n;
         return true;
     }
@@ -32,5 +31,9 @@ public class Fila {
         }
         começo = (começo+1)%n;
         return true;
+    }
+    
+    public Quarto primeiro(){
+        return q[começo];
     }
 }

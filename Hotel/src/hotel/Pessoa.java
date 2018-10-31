@@ -17,6 +17,8 @@ public class Pessoa {
         this.contato = contato;
         this.cpf = cpf;
         hospedado = false;
+        quarto = -1;
+        
     }
     
     
@@ -69,6 +71,16 @@ public class Pessoa {
     public void setHospedado(boolean hospedado) {
         this.hospedado = hospedado;
     }
+
+    public int getQuarto() {
+        return quarto;
+    }
+
+    public void setQuarto(int quarto) {
+        this.quarto = quarto;
+    }
+    
+    
     
     
     protected String nome;
@@ -77,6 +89,7 @@ public class Pessoa {
     protected String contato;
     protected int cpf;
     protected boolean hospedado;
+    protected int quarto;
 
   
     

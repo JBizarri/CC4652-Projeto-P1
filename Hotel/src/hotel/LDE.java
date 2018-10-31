@@ -12,32 +12,25 @@ public class LDE {
        ultimo = null;
        n = 0;
    }
-
-    public No getPrimeiro() {
+   
+   public No getPrimeiro() {
         return primeiro;
     }
-
-    public void setPrimeiro(No primeiro) {
+     public void setPrimeiro(No primeiro) {
         this.primeiro = primeiro;
     }
-
-    public No getUltimo() {
+     public No getUltimo() {
         return ultimo;
     }
-
-    public void setUltimo(No ultimo) {
+     public void setUltimo(No ultimo) {
         this.ultimo = ultimo;
     }
-
-    public int getN() {
+     public int getN() {
         return n;
     }
-
-    public void setN(int n) {
+     public void setN(int n) {
         this.n = n;
     }
-   
-   
 
    
    public boolean insere(Pessoa p){
@@ -98,5 +91,4 @@ public class LDE {
            return null; 
        }
    }
-
 }

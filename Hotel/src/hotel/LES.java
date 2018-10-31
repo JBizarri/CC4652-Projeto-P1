@@ -15,7 +15,7 @@ package hotel;
 public class LES {
     public LES(){
         this.n = 0;
-        list = new Quarto[n];
+        list = new Quarto[50];
     }
 
     public int getN() {
@@ -27,13 +27,14 @@ public class LES {
     }
     
     public boolean insere(Quarto q){
-        if(n<50)
+        if(n==50)
             return false;
         int i;
+        
         for(i=0;i<n && list[i].getNumero()<q.getNumero();i++ );
         
         for(int j=n;j>i;j--){
-            list[i] = list[i-1];
+            list[j] = list[j-1];
         }
         list[i] = q;
            
@@ -59,17 +60,16 @@ public class LES {
         return true;
     }
     
-    public Quarto busca(Quarto q){
+    public Quarto busca(int numero){
         if(n<=0){
             return null;
         }
         int i;
-        for(i=0;i<n && list[i].getNumero()!=q.getNumero();i++ );
+        for(i=0;i<n && list[i].getNumero()!=numero;i++ );
         if(i>=n){
             return null;
-        }else{
-            return list[i];
         }
+        return list[i];
     }
     
     private int n;

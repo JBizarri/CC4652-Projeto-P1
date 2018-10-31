@@ -9,6 +9,9 @@ import hotel.Fila;
 import hotel.LDE;
 import hotel.LES;
 import hotel.Pessoa;
+import hotel.QuartoA;
+import hotel.QuartoB;
+import hotel.QuartoC;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
@@ -220,8 +223,6 @@ public class Cadastro extends javax.swing.JFrame {
         Pessoa p = new Pessoa(nome,endereco,cidade,contato,cpf);
         lde.insere(p);
         try{
-            
-            
             FileOutputStream arquivo = new FileOutputStream("cadastro.txt",true);
             PrintWriter pr = new PrintWriter(arquivo);
             pr.println(p.getNome());
@@ -236,12 +237,15 @@ public class Cadastro extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Erro ao escrever o arquivo");
         }
+        
         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
         txtNome.setText("");
         txtEndereco.setText("");
         txtCidade.setText("");
         txtContato.setText("");
         txtCpf.setText("");
+        
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
